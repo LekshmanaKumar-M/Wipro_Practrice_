@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Chat with MyFin Support</title>
+    <link rel="stylesheet" th:href="@{/css/chat.css}">
+</head>
+<body>
+
+<div class="chat-layout"
+     th:attr="data-role=${role},data-customer-id=${customerId}">
+
+    <header class="chat-header">
+        <div>
+            <div class="chat-title">MyFin Support</div>
+            <div class="chat-subtitle">
+                Customer • ID: <span th:text="${customerId}"></span>
+            </div>
+        </div>
+    </header>
+
+    <main class="chat-main">
+        <section id="chatWindow" class="chat-window">
+
+            <!-- Past Messages -->
+            <div th:each="msg : ${messages}"
+                 th:class="'chat-row ' + (${msg.sender} == 'CUSTOMER' ? 'from-user' : 'from-assistant')">
+
+                <div class="avatar"
+                     th:text="${msg.sender} == 'CUSTOMER' ? 'C' : 'A'">
+                </div>
+
+                <div class="bubble">
+                    <div class="bubble-header"
+                         th:text="${msg.sender} == 'CUSTOMER' ? 'You' : 'MyFin Support'"></div>
+
+                    <div class="bubble-body" th:text="${msg.message}"></div>
+
+                    <div class="bubble-footer"
+                         th:text="${#temporals.format(msg.timestamp, 'HH:mm')}"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="chat-input-bar">
+            <textarea id="messageInput" placeholder="Type your message..."></textarea>
+            <button id="sendBtn" type="button">Send</button>
+        </section>
+    </main>
+</div>
+
+<!-- WebSocket -->
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+<script th:src="@{/js/chat.js}"></script>
+
+</body>
+</html>
