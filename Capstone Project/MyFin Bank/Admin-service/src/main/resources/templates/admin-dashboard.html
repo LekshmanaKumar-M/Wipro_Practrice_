@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Dashboard</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #dce7ff, #f5f9ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(90deg, #002b5c, #004a99);
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+        }
+
+        .navbar .brand {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .navbar a {
+            color: white;
+            margin-left: 22px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #cfe6ff;
+        }
+
+        /* MAIN WRAPPER */
+        .main-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            padding: 40px 15px;
+        }
+
+        /* DASHBOARD CARD */
+        .dashboard-card {
+            width: 100%;
+            max-width: 750px;
+
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(12px);
+
+            padding: 40px;
+            border-radius: 20px;
+
+            box-shadow:
+                8px 8px 20px rgba(0,0,0,0.12),
+                -4px -4px 12px rgba(255,255,255,0.4);
+
+            text-align: center;
+        }
+
+        h2 {
+            color: #003366;
+            margin-bottom: 10px;
+            font-size: 30px;
+            font-weight: 600;
+        }
+
+        .info {
+            font-size: 16px;
+            margin-bottom: 35px;
+            color: #003366;
+            opacity: 0.9;
+        }
+
+        /* BUTTON GRID */
+        .button-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 25px 40px;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 14px 25px;
+            background: linear-gradient(90deg, #0051cc, #007bff);
+            color: white;
+            text-align: center;
+            border-radius: 12px;
+            text-decoration: none;
+            font-size: 17px;
+            font-weight: 600;
+            width: 240px;
+            display: inline-block;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 14px rgba(0,123,255,0.3);
+        }
+
+        .btn:hover {
+            background: linear-gradient(90deg, #003f9a, #0066e6);
+            box-shadow: 0 6px 18px rgba(0,102,255,0.35);
+        }
+
+        /* FOOTER */
+        footer {
+            background: #002b5c;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            font-size: 14px;
+            margin-top: auto;
+            box-shadow: 0 -3px 12px rgba(0,0,0,0.15);
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="brand">MyFin Bank</div>
+
+    <div>
+        
+        <a href="/admin/logout">Logout</a>
+    </div>
+</div>
+
+<!-- DASHBOARD CARD -->
+<div class="main-wrapper">
+    <div class="dashboard-card">
+
+        <h2>Welcome Admin</h2>
+
+        <div class="info">
+            Manage customers, loan approvals, and chat support from your centralized dashboard.
+        </div>
+
+        <!-- BUTTON GRID -->
+        <div class="button-grid">
+
+            <a class="btn" href="/admin/customers/list">View Customer List</a>
+
+            <a class="btn" href="/admin/loans">View Loan Requests</a>
+
+            <a class="btn" href="http://localhost:8084/chat">Open Chat Module</a>
+
+            <a class="btn" href="/admin/chat/unread">Unread Chats</a>
+
+            <a class="btn" href="/admin/chat/customers">All Chat Customers</a>
+
+        </div>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    © 2025 MyFin Bank. All Rights Reserved.
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Edit Customer • Admin</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #dce7ff, #f5f9ff);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: linear-gradient(90deg, #002b5c, #004a99);
+            color: white;
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 12px rgba(0,0,0,0.15);
+        }
+
+        .navbar .brand {
+            font-size: 26px;
+            font-weight: 700;
+        }
+
+        .navbar a {
+            color: white;
+            margin-left: 20px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #cfe6ff;
+        }
+
+        /* CENTER WRAPPER */
+        .wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            padding: 40px 15px;
+        }
+
+        /* CARD (Glassmorphic) */
+        .card {
+            width: 100%;
+            max-width: 550px;
+
+            background: rgba(255, 255, 255, 0.78);
+            backdrop-filter: blur(12px);
+
+            padding: 40px;
+            border-radius: 20px;
+
+            box-shadow:
+                8px 8px 20px rgba(0,0,0,0.12),
+                -4px -4px 12px rgba(255,255,255,0.4);
+        }
+
+        h2 {
+            text-align: center;
+            color: #003366;
+            margin-bottom: 25px;
+            font-size: 28px;
+            font-weight: 600;
+        }
+
+        /* FORM INPUTS */
+        label {
+            font-weight: 600;
+            color: #003366;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #ccd9e8;
+            border-radius: 10px;
+            margin-bottom: 18px;
+            background: #f7faff;
+            transition: 0.25s ease;
+            font-size: 15px;
+        }
+
+        input:focus, select:focus {
+            border-color: #0066ff;
+            background: white;
+            outline: none;
+            box-shadow: 0 0 8px rgba(0,102,255,0.3);
+        }
+
+        /* BUTTON */
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(90deg, #0051cc, #007bff);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 18px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: 0.3s ease;
+            box-shadow: 0 4px 14px rgba(0,123,255,0.3);
+        }
+
+        button:hover {
+            background: linear-gradient(90deg, #003f9a, #0066e6);
+            box-shadow: 0 6px 18px rgba(0,102,255,0.35);
+        }
+
+        /* BACK LINK */
+        .back-link {
+            display: block;
+            margin-top: 18px;
+            text-align: center;
+            font-size: 15px;
+            font-weight: 600;
+            color: #003f9a;
+            text-decoration: none;
+            transition: 0.2s;
+        }
+
+        .back-link:hover {
+            text-decoration: underline;
+            color: #002b70;
+        }
+
+        /* FOOTER */
+        footer {
+            background: #002b5c;
+            color: white;
+            text-align: center;
+            padding: 16px;
+            font-size: 14px;
+            margin-top: auto;
+            box-shadow: 0 -3px 12px rgba(0,0,0,0.15);
+        }
+
+    </style>
+</head>
+
+<body>
+
+<!-- NAVBAR -->
+<div class="navbar">
+    <div class="brand">MyFin Bank</div>
+
+    <div>
+        
+        <a href="/admin/logout">Logout</a>
+    </div>
+</div>
+
+<!-- EDIT FORM CARD -->
+<div class="wrapper">
+    <div class="card">
+
+        <h2>Edit Customer</h2>
+
+        <form action="/admin/customers/update" method="post">
+
+            <input type="hidden" name="id" th:value="${customer.id}">
+
+            <label>Name:</label>
+            <input type="text" name="name" th:value="${customer.name}" required>
+
+            <label>Account Number:</label>
+            <input type="text" name="accountNumber" th:value="${customer.accountNumber}" required>
+
+            <label>Email:</label>
+            <input type="email" name="email" th:value="${customer.email}" required>
+
+            <label>Balance:</label>
+            <input type="number" name="balance" th:value="${customer.balance}" required>
+
+            <label>Status:</label>
+            <select name="active">
+                <option th:value="true" th:selected="${customer.active}">Active</option>
+                <option th:value="false" th:selected="${!customer.active}">Inactive</option>
+            </select>
+
+            <button type="submit">Update Customer</button>
+        </form>
+
+        <a href="/admin/customers/list" class="back-link">← Back to Customer List</a>
+
+    </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+    © 2025 MyFin Bank. All Rights Reserved.
+</footer>
+
+</body>
+</html>
