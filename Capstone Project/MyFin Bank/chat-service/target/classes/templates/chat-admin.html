@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Chat • MyFin</title>
+    <link rel="stylesheet" th:href="@{/css/chat.css}">
+</head>
+<body>
+
+<div class="chat-layout"
+     th:attr="data-role=${role},data-customer-id=${customerId}">
+
+    <header class="chat-header">
+        <div>
+            <div class="chat-title">Conversation with Customer</div>
+            <div class="chat-subtitle">
+                Admin • Customer ID:
+                <span th:text="${customerId}"></span>
+            </div>
+        </div>
+
+        <!-- ✅ BUTTONS ADDED HERE -->
+        <div style="display:flex; gap:12px; align-items:center;">
+
+            <!-- Existing Back to Selector -->
+            <a href="/chat" class="back-link">← Back to selector</a>
+
+            <!-- ⭐ NEW: Back to Dashboard -->
+            <a href="http://localhost:8082/admin/dashboard" 
+               class="back-link"
+               style="background:#004b92; padding:6px 12px; border-radius:6px; color:white;">
+                Dashboard
+            </a>
+
+        </div>
+        <!-- END -->
+    </header>
+
+    <main class="chat-main">
+        <section id="chatWindow" class="chat-window">
+
+            <div th:each="msg : ${messages}"
+                 th:class="'chat-row ' + (${msg.sender} == 'ADMIN' ? 'from-user' : 'from-assistant')">
+
+                <div class="avatar"
+                     th:text="${msg.sender} == 'ADMIN' ? 'A' : 'C'">
+                </div>
+
+                <div class="bubble">
+                    <div class="bubble-header"
+                         th:text="${msg.sender} == 'ADMIN' ? 'You (Admin)' : 'Customer'"></div>
+
+                    <div class="bubble-body" th:text="${msg.message}"></div>
+
+                    <div class="bubble-footer"
+                         th:text="${#temporals.format(msg.timestamp,'HH:mm')}"></div>
+                </div>
+            </div>
+
+        </section>
+
+        <section class="chat-input-bar">
+            <textarea id="messageInput" placeholder="Type your reply..."></textarea>
+            <button id="sendBtn" type="button">Send</button>
+        </section>
+    </main>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/stompjs@2.3.3/lib/stomp.min.js"></script>
+<script th:src="@{/js/chat.js}"></script>
+
+</body>
+</html>

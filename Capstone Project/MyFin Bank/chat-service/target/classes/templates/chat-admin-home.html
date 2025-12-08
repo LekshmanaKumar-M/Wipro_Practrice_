@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Admin Chat Home</title>
+    <link rel="stylesheet" th:href="@{/css/chat.css}">
+</head>
+<body>
+
+<div class="chat-layout">
+    <header class="chat-header">
+        <div>
+            <div class="chat-title">MyFin Chat Console</div>
+            <div class="chat-subtitle">Admin • Select a customer to start chatting</div>
+        </div>
+    </header>
+
+    <main class="chat-main single-card">
+        <div class="chat-card">
+            <h2>Select Customer</h2>
+
+            <label>Customer ID</label>
+            <input type="number" id="customerIdInput" placeholder="Enter Customer ID" required>
+
+            <button type="button" onclick="openChatForAdmin()">Open Chat</button>
+
+            <p class="hint-text">
+                You can get customer IDs from Admin → Customer List or Unread Chats.
+            </p>
+        </div>
+    </main>
+</div>
+
+<script>
+    function openChatForAdmin() {
+        const id = document.getElementById('customerIdInput').value;
+        if (!id) return;
+        window.location.href = "/chat/admin/" + id;
+    }
+</script>
+
+</body>
+</html>
